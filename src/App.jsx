@@ -1,5 +1,4 @@
 import { useScrollSpy } from './hooks/useScrollSpy';
-import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
@@ -20,8 +19,7 @@ export default function App() {
   const activeSection = useScrollSpy(SECTION_IDS);
 
   return (
-    <div className="font-poppins antialiased">
-      <TopBar />
+    <div className="max-w-full overflow-x-hidden font-poppins antialiased">
       <Navbar activeSection={activeSection} />
       <main>
         <Hero />

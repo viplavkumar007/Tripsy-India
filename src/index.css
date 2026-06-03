@@ -12,12 +12,23 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   body {
     font-family: 'Poppins', sans-serif;
     color: #1E293B;
     background: #ffffff;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
   }
 
@@ -153,7 +164,7 @@
   }
 
   .whatsapp-float {
-    @apply fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full text-white shadow-lg transition-all duration-300;
+    @apply fixed bottom-4 right-4 z-50 flex items-center justify-center w-14 h-14 rounded-full text-white shadow-lg transition-all duration-300 sm:bottom-6 sm:right-6;
     background: linear-gradient(135deg, #25D366, #128C7E);
   }
   .whatsapp-float:hover {

@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { brand, nav, contact } from '../data/siteContent';
 import { useScrolled } from '../hooks/useScrollSpy';
 
+const navbarLogo = '/navbar-logo.png';
+
 export default function Navbar({ activeSection }) {
   const scrolled = useScrolled(60);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,16 +25,24 @@ export default function Navbar({ activeSection }) {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-40 w-full max-w-[100vw] transition-all duration-300 ${
         scrolled
           ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
-          : 'bg-white'
+          : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16 md:h-18">
+      <nav className="relative max-w-7xl mx-auto px-3 md:px-4 flex items-center justify-between gap-3 h-16 md:h-24 overflow-hidden md:overflow-visible">
         {/* Logo */}
-        <a href="#home" onClick={() => handleNavClick('#home')} className="flex items-center gap-2 flex-shrink-0">
-          <img src={brand.logo} alt={brand.name} className="h-10 md:h-12 w-auto object-contain" />
+        <a
+          href="#home"
+          onClick={() => handleNavClick('#home')}
+          className={`flex h-12 w-28 items-center flex-shrink-0 overflow-hidden rounded-md border px-0 md:h-[calc(100%-1rem)] md:w-auto md:max-w-none md:px-2 transition-colors ${
+            scrolled
+              ? 'border-transparent bg-transparent'
+              : 'border-transparent bg-transparent md:border-primary/25 md:bg-white/50 md:backdrop-blur-sm md:shadow-sm'
+          }`}
+        >
+          <img src={navbarLogo} alt={brand.name} className="block h-full max-w-full w-auto object-contain" />
         </a>
 
         {/* Desktop Nav */}
@@ -44,7 +54,15 @@ export default function Navbar({ activeSection }) {
               <li key={item.label}>
                 <button
                   onClick={() => handleNavClick(item.href)}
-                  className={`nav-link text-sm font-medium ${isActive ? 'active text-primary' : 'text-text-dark hover:text-primary'}`}
+                  className={`nav-link text-sm font-medium ${
+                    isActive
+                      ? scrolled
+                        ? 'active text-primary'
+                        : 'text-text-dark bg-white/55 border border-primary/45 backdrop-blur-sm shadow-sm px-3 py-2 rounded-full'
+                      : scrolled
+                        ? 'text-text-dark hover:text-primary'
+                        : 'text-text-dark/90 hover:text-primary bg-white/45 border border-primary/30 backdrop-blur-sm shadow-sm px-3 py-2 rounded-full'
+                  }`}
                 >
                   {item.label}
                 </button>
@@ -55,8 +73,17 @@ export default function Navbar({ activeSection }) {
 
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm font-semibold text-text-dark hover:text-primary transition-colors">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+          <a
+            href={`tel:${contact.phone}`}
+            className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
+              scrolled ? 'text-text-dark hover:text-primary' : 'text-text-dark hover:text-primary drop-shadow-sm'
+            }`}
+          >
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                scrolled ? 'bg-primary/10' : 'bg-white/60 backdrop-blur-sm'
+              }`}
+            >
               <Phone size={14} className="text-primary" />
             </div>
             <span>{contact.phoneDisplay}</span>
@@ -72,7 +99,11 @@ export default function Navbar({ activeSection }) {
         {/* Mobile menu btn */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-border text-text-dark hover:bg-section-alt transition-colors"
+          className={`absolute right-3 top-1/2 -translate-y-1/2 lg:static lg:translate-y-0 lg:hidden w-10 h-10 flex flex-shrink-0 items-center justify-center rounded-xl border transition-colors ${
+            scrolled
+              ? 'border-border text-text-dark hover:bg-section-alt'
+              : 'border-white/60 text-text-dark bg-white/50 hover:bg-white/70'
+          }`}
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -97,8 +128,8 @@ export default function Navbar({ activeSection }) {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl flex flex-col lg:hidden"
             >
-              <div className="flex items-center justify-between p-4 border-b border-border">
-                <img src={brand.logo} alt={brand.name} className="h-10 w-auto" />
+              <div className="flex items-center justify-between h-20 px-4 border-b border-border">
+                <img src={navbarLogo} alt={brand.name} className="block h-full w-auto object-contain" />
                 <button onClick={() => setMobileOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-lg bg-section-alt">
                   <X size={18} />
                 </button>

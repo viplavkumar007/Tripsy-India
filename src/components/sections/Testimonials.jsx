@@ -72,20 +72,12 @@ export default function Testimonials() {
                 <p className="text-text-dark text-lg md:text-xl leading-relaxed font-medium mb-8">
                   "{t.text}"
                 </p>
-                <div className="flex items-center gap-4">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/20"
-                    loading="lazy"
-                  />
-                  <div>
-                    <p className="font-bold text-text-dark">{t.name}</p>
-                    <p className="text-text-light text-sm">{t.location}</p>
-                    <span className="inline-block text-xs bg-primary/10 text-primary font-medium px-2.5 py-0.5 rounded-full mt-1">
-                      {t.destination}
-                    </span>
-                  </div>
+                <div>
+                  <p className="font-bold text-text-dark">{t.name}</p>
+                  <p className="text-text-light text-sm">{t.location}</p>
+                  <span className="inline-block text-xs bg-primary/10 text-primary font-medium px-2.5 py-0.5 rounded-full mt-1">
+                    {t.destination}
+                  </span>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -120,15 +112,6 @@ export default function Testimonials() {
               </button>
             </div>
           </div>
-        </div>
-
-        {/* All Reviewer Avatars */}
-        <div className="flex items-center justify-center gap-3 mt-10">
-          {testimonials.map((t, i) => (
-            <button key={t.id} onClick={() => goTo(i)} className={`transition-all duration-300 ${i === current ? 'scale-110 ring-2 ring-primary ring-offset-2' : 'opacity-50 hover:opacity-80'} rounded-full`}>
-              <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" loading="lazy" />
-            </button>
-          ))}
         </div>
       </div>
     </section>

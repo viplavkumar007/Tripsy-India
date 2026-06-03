@@ -25,12 +25,6 @@ function DestinationCard({ dest, index }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         {/* Badge */}
         <span className="floating-badge">{dest.badge}</span>
-        {/* Price */}
-        <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-1.5">
-          <p className="text-xs text-text-light font-medium">Starting from</p>
-          <p className="text-primary font-black text-lg leading-none">{dest.price}</p>
-          <p className="text-text-light text-xs">per person</p>
-        </div>
       </div>
 
       {/* Content */}

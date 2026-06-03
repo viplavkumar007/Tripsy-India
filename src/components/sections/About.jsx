@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2, Award, Users, MapPin } from 'lucide-react';
-import { fadeUp, slideLeft, slideRight, staggerContainer, viewportOnce } from '../../utils/motionVariants';
+import { brand } from '../../data/siteContent';
+import { fadeUp, slideLeft, staggerContainer, viewportOnce } from '../../utils/motionVariants';
 
 const features = [
   { icon: CheckCircle2, text: 'Customized Holiday Packages for every budget' },
@@ -22,60 +23,21 @@ export default function About() {
     <section id="about" className="py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          {/* Left: Image Grid */}
+          {/* Left: Brand Logo */}
           <motion.div
             variants={slideLeft}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="relative"
+            className="relative flex min-h-[360px] items-center justify-center"
           >
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="rounded-2xl overflow-hidden h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1566837945700-30057527ade0?w=400&q=80"
-                    alt="Kashmir"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden h-36">
-                  <img
-                    src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=400&q=80"
-                    alt="Goa"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div className="space-y-4 mt-8">
-                <div className="rounded-2xl overflow-hidden h-36">
-                  <img
-                    src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&q=80"
-                    alt="Manali"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1621996659490-3275b4d0d951?w=400&q=80"
-                    alt="South India"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Floating badge */}
-            <div
-              className="absolute -bottom-5 -right-5 text-white rounded-2xl p-5 shadow-xl"
-              style={{ background: 'linear-gradient(135deg,#00B8C4,#0EA5E9)' }}
-            >
-              <p className="text-3xl font-black">10+</p>
-              <p className="text-xs font-medium opacity-90 mt-0.5">Years of<br />Excellence</p>
+            <div className="flex w-full max-w-xl items-center justify-center">
+              <img
+                src={brand.logo}
+                alt={brand.name}
+                className="block w-full max-w-lg object-contain"
+                loading="lazy"
+              />
             </div>
           </motion.div>
 

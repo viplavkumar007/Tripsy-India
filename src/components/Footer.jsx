@@ -21,7 +21,9 @@ export default function Footer() {
         >
           {/* Col 1: Brand */}
           <motion.div variants={fadeUp} className="lg:col-span-1">
-            <img src={brand.logo} alt={brand.name} className="h-14 w-auto mb-4 brightness-0 invert" />
+            <div className="mb-4 inline-flex h-16 max-w-full items-center rounded-md bg-white">
+              <img src={brand.logo} alt={brand.name} className="block h-full w-auto object-contain" />
+            </div>
             <p className="text-white/60 text-sm leading-relaxed mb-5">
               Tripsy India Tours & Holidays — The Holiday Wala. Creating unforgettable travel memories across India since {brand.established}. Your trusted travel partner for customized holiday packages.
             </p>

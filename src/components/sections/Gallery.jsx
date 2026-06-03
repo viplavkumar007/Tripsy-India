@@ -28,27 +28,26 @@ export default function Gallery() {
           </motion.p>
         </motion.div>
 
-        {/* Masonry Grid */}
+        {/* Gallery Grid */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]"
+          className="columns-1 sm:columns-2 lg:columns-3 gap-5"
         >
           {gallery.map((item, i) => (
             <motion.div
               key={i}
               variants={scaleIn}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group ${
-                i === 0 ? 'row-span-2' : i === 4 ? 'row-span-2' : ''
-              }`}
+              className="relative mb-5 break-inside-avoid overflow-hidden rounded-2xl cursor-pointer group bg-section-alt border border-border"
+              style={{ aspectRatio: item.aspect }}
               onClick={() => setLightbox(item)}
             >
               <img
                 src={item.src}
                 alt={item.label}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -84,7 +83,7 @@ export default function Gallery() {
                 exit={{ scale: 0.8, opacity: 0 }}
                 src={lightbox.src}
                 alt={lightbox.label}
-                className="max-w-4xl max-h-[85vh] w-full object-contain rounded-2xl"
+                className="max-w-[92vw] max-h-[85vh] object-contain rounded-2xl"
                 onClick={(e) => e.stopPropagation()}
               />
               <p className="absolute bottom-6 text-white font-semibold text-lg">{lightbox.label}</p>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Package, Shield, Headphones, Tag, ChevronDown } from 'lucide-react';
 import { hero } from '../../data/siteContent';
+import EnquiryForm from '../EnquiryForm';
 
 const iconMap = { Package, Shield, Headphones, Tag };
 
@@ -20,7 +21,22 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-navy/35" />
       </div>
 
-      <div className="relative z-10 flex-1" />
+      <div className="relative z-10 flex-1 flex items-center">
+        <div className="max-w-7xl mx-auto w-full px-4 pt-20 pb-6 lg:pt-28 lg:pb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            className="ml-auto w-full max-w-md"
+          >
+            <EnquiryForm
+              title="Plan Your Holiday"
+              compact
+              className="bg-white/95 backdrop-blur-xl"
+            />
+          </motion.div>
+        </div>
+      </div>
 
       {/* Trust Badges */}
       <div className="relative z-10 bg-white/95 backdrop-blur-xl border-t border-border">

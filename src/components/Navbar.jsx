@@ -26,9 +26,9 @@ export default function Navbar({ activeSection }) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 w-full max-w-[100vw] transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
-          : 'bg-transparent'
+        scrolled || mobileOpen
+          ? 'bg-white lg:bg-white/95 lg:backdrop-blur-xl shadow-lg shadow-black/5'
+          : 'bg-white lg:bg-transparent'
       }`}
     >
       <nav className="relative max-w-7xl mx-auto px-3 md:px-4 flex items-center justify-between gap-3 h-16 md:h-24 overflow-hidden md:overflow-visible">
@@ -102,7 +102,7 @@ export default function Navbar({ activeSection }) {
           className={`absolute right-3 top-1/2 -translate-y-1/2 lg:static lg:translate-y-0 lg:hidden w-10 h-10 flex flex-shrink-0 items-center justify-center rounded-xl border transition-colors ${
             scrolled
               ? 'border-border text-text-dark hover:bg-section-alt'
-              : 'border-white/60 text-text-dark bg-white/50 hover:bg-white/70'
+              : 'border-border text-text-dark bg-section-alt hover:bg-white md:border-white/60 md:bg-white/50 md:hover:bg-white/70'
           }`}
           aria-label="Toggle menu"
         >
@@ -126,7 +126,7 @@ export default function Navbar({ activeSection }) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl flex flex-col lg:hidden"
+              className="fixed inset-0 bg-white z-50 shadow-2xl flex flex-col lg:hidden"
             >
               <div className="flex items-center justify-between h-20 px-4 border-b border-border">
                 <img src={navbarLogo} alt={brand.name} className="block h-full w-auto object-contain" />

@@ -1,6 +1,7 @@
 import { useScrollSpy } from './hooks/useScrollSpy';
 import Navbar from './components/Navbar';
 import Hero from './components/sections/Hero';
+import HomeHillPackages from './components/sections/HomeHillPackages';
 import About from './components/sections/About';
 import WhyChooseUs from './components/sections/WhyChooseUs';
 import Packages from './components/sections/Packages';
@@ -23,6 +24,7 @@ export default function App() {
       <Navbar activeSection={activeSection} />
       <main>
         <Hero />
+        <HomeHillPackages />
         <About />
         <WhyChooseUs />
         <Packages />

@@ -67,18 +67,41 @@ export default function Gallery() {
         </motion.div>
 
         {/* Gallery Grid */}
+        <div className="grid grid-cols-1 gap-5 sm:hidden">
+          {gallery.map((item) => {
+            const mobileImage = getMobileImage(item.src);
+            const imageSize = getImageSize(item.aspect);
+
+            return (
+              <div
+                key={item.src}
+                className="relative overflow-hidden rounded-2xl cursor-pointer bg-section-alt border border-border"
+                style={{ aspectRatio: item.aspect }}
+                onClick={() => setLightbox(item)}
+              >
+                <img
+                  src={mobileImage}
+                  alt={item.label}
+                  width={imageSize.width}
+                  height={imageSize.height}
+                  className="w-full h-full object-contain"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </div>
+            );
+          })}
+        </div>
+
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="columns-1 sm:columns-2 lg:columns-3 gap-5"
+          className="hidden sm:block sm:columns-2 lg:columns-3 gap-5"
         >
-          {gallery.map((item, i) => {
-            const mobileImage = getMobileImage(item.src);
-            const imageSize = getImageSize(item.aspect);
-            const isPriority = i < 3;
-
+          {gallery.map((item) => {
             return (
               <motion.div
                 key={item.src}
@@ -87,23 +110,12 @@ export default function Gallery() {
                 style={{ aspectRatio: item.aspect }}
                 onClick={() => setLightbox(item)}
               >
-                <picture>
-                  <source
-                    media="(max-width: 639px)"
-                    type="image/jpeg"
-                    srcSet={mobileImage}
-                  />
-                  <img
-                    src={item.src}
-                    alt={item.label}
-                    width={imageSize.width}
-                    height={imageSize.height}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading={isMobile || isPriority ? 'eager' : 'lazy'}
-                    decoding="async"
-                    fetchPriority={isMobile || isPriority ? 'high' : 'auto'}
-                  />
-                </picture>
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ZoomIn size={28} className="text-white" />

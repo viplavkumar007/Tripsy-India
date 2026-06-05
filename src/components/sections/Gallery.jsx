@@ -1,16 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn } from 'lucide-react';
 import { gallery } from '../../data/siteContent';
 import { fadeUp, staggerContainer, scaleIn, viewportOnce } from '../../utils/motionVariants';
 
-function getResponsiveImage(src) {
+function getMobileImage(src) {
   const base = src.replace(/\.png$/i, '');
 
-  return {
-    small: `${base}-720.jpg`,
-    large: `${base}-1200.jpg`,
-  };
+  return `${base}-720.jpg`;
 }
 
 function getImageSize(aspect) {
@@ -21,6 +18,32 @@ function getImageSize(aspect) {
 
 export default function Gallery() {
   const [lightbox, setLightbox] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia('(max-width: 639px)');
+    const updateIsMobile = () => setIsMobile(mobileQuery.matches);
+
+    updateIsMobile();
+    mobileQuery.addEventListener('change', updateIsMobile);
+
+    return () => mobileQuery.removeEventListener('change', updateIsMobile);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return undefined;
+
+    const preloaders = gallery.map((item) => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = getMobileImage(item.src);
+      return image;
+    });
+
+    return () => preloaders.forEach((image) => {
+      image.src = '';
+    });
+  }, [isMobile]);
 
   return (
     <section id="gallery" className="py-20 md:py-28 bg-white">
@@ -49,10 +72,10 @@ export default function Gallery() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="columns-1 sm:columns-2 lg:columns-3 gap-5"
         >
           {gallery.map((item, i) => {
-            const responsiveImage = getResponsiveImage(item.src);
+            const mobileImage = getMobileImage(item.src);
             const imageSize = getImageSize(item.aspect);
             const isPriority = i < 3;
 
@@ -60,25 +83,25 @@ export default function Gallery() {
               <motion.div
                 key={item.src}
                 variants={scaleIn}
-                className="relative overflow-hidden rounded-2xl cursor-pointer group bg-section-alt border border-border"
+                className="relative mb-5 break-inside-avoid overflow-hidden rounded-2xl cursor-pointer group bg-section-alt border border-border"
                 style={{ aspectRatio: item.aspect }}
                 onClick={() => setLightbox(item)}
               >
                 <picture>
                   <source
+                    media="(max-width: 639px)"
                     type="image/jpeg"
-                    srcSet={`${responsiveImage.small} 720w, ${responsiveImage.large} 1200w`}
-                    sizes="(min-width: 1024px) 31vw, (min-width: 640px) 47vw, 92vw"
+                    srcSet={mobileImage}
                   />
                   <img
                     src={item.src}
                     alt={item.label}
                     width={imageSize.width}
                     height={imageSize.height}
-                    className="block w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                    loading={isPriority ? 'eager' : 'lazy'}
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                    loading={isMobile || isPriority ? 'eager' : 'lazy'}
                     decoding="async"
-                    fetchPriority={isPriority ? 'high' : 'auto'}
+                    fetchPriority={isMobile || isPriority ? 'high' : 'auto'}
                   />
                 </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

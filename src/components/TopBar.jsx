@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Phone, Mail, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 import { contact } from '../data/siteContent';
 
 export default function TopBar() {
@@ -20,10 +20,6 @@ export default function TopBar() {
             <Mail size={13} />
             <span>{contact.email}</span>
           </a>
-          <span className="flex items-center gap-1.5 text-white/70">
-            <MapPin size={13} />
-            <span>{contact.address}</span>
-          </span>
         </div>
         <div className="flex items-center gap-3">
           <a href={contact.social.facebook} target="_blank" rel="noreferrer"

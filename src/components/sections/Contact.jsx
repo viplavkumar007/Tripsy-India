@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MessageCircle } from 'lucide-react';
 import { contact } from '../../data/siteContent';
 import EnquiryForm from '../EnquiryForm';
 import { fadeUp, slideLeft, slideRight, staggerContainer, viewportOnce } from '../../utils/motionVariants';
@@ -58,15 +58,6 @@ export default function Contact() {
                     <p className="text-xs text-text-light">Reply within 2 hours</p>
                   </div>
                 </a>
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg,#7B2FF7,#FF2E93)' }}>
-                    <MapPin size={18} className="text-white" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-text-light font-medium mb-0.5">Visit Us</p>
-                    <p className="font-semibold text-text-dark text-sm">{contact.address}</p>
-                  </div>
-                </div>
               </div>
             </div>
 

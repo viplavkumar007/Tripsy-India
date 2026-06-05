@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter, Heart } from 'lucide-react';
+import { Phone, Mail, Facebook, Instagram, Youtube, Twitter, Heart } from 'lucide-react';
 import { brand, contact, quickLinks, popularDestinations } from '../data/siteContent';
 import { fadeUp, staggerContainer, viewportOnce } from '../utils/motionVariants';
 
@@ -101,15 +101,6 @@ export default function Footer() {
                   <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors break-all">{contact.secondaryEmail}</p>
                 </div>
               </a>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <MapPin size={14} />
-                </div>
-                <div>
-                  <p className="text-white/40 text-xs mb-0.5">Address</p>
-                  <p className="text-white/80 text-sm leading-relaxed">{contact.address}</p>
-                </div>
-              </div>
             </div>
           </motion.div>
         </motion.div>

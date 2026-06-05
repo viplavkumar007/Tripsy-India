@@ -4,6 +4,21 @@ import { X, ZoomIn } from 'lucide-react';
 import { gallery } from '../../data/siteContent';
 import { fadeUp, staggerContainer, scaleIn, viewportOnce } from '../../utils/motionVariants';
 
+function getResponsiveImage(src) {
+  const base = src.replace(/\.png$/i, '');
+
+  return {
+    small: `${base}-720.jpg`,
+    large: `${base}-1200.jpg`,
+  };
+}
+
+function getImageSize(aspect) {
+  const [width, height] = aspect.split('/').map((value) => value.trim());
+
+  return { width, height };
+}
+
 export default function Gallery() {
   const [lightbox, setLightbox] = useState(null);
 
@@ -34,31 +49,48 @@ export default function Gallery() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="columns-1 sm:columns-2 lg:columns-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
-          {gallery.map((item, i) => (
-            <motion.div
-              key={i}
-              variants={scaleIn}
-              className="relative mb-5 break-inside-avoid overflow-hidden rounded-2xl cursor-pointer group bg-section-alt border border-border"
-              style={{ aspectRatio: item.aspect }}
-              onClick={() => setLightbox(item)}
-            >
-              <img
-                src={item.src}
-                alt={item.label}
-                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ZoomIn size={28} className="text-white" />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-white font-semibold text-sm">{item.label}</p>
-              </div>
-            </motion.div>
-          ))}
+          {gallery.map((item, i) => {
+            const responsiveImage = getResponsiveImage(item.src);
+            const imageSize = getImageSize(item.aspect);
+            const isPriority = i < 3;
+
+            return (
+              <motion.div
+                key={item.src}
+                variants={scaleIn}
+                className="relative overflow-hidden rounded-2xl cursor-pointer group bg-section-alt border border-border"
+                style={{ aspectRatio: item.aspect }}
+                onClick={() => setLightbox(item)}
+              >
+                <picture>
+                  <source
+                    type="image/jpeg"
+                    srcSet={`${responsiveImage.small} 720w, ${responsiveImage.large} 1200w`}
+                    sizes="(min-width: 1024px) 31vw, (min-width: 640px) 47vw, 92vw"
+                  />
+                  <img
+                    src={item.src}
+                    alt={item.label}
+                    width={imageSize.width}
+                    height={imageSize.height}
+                    className="block w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                    loading={isPriority ? 'eager' : 'lazy'}
+                    decoding="async"
+                    fetchPriority={isPriority ? 'high' : 'auto'}
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ZoomIn size={28} className="text-white" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-white font-semibold text-sm">{item.label}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Lightbox */}

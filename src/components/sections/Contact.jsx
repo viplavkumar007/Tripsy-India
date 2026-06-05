@@ -54,6 +54,7 @@ export default function Contact() {
                   <div>
                     <p className="text-xs text-text-light font-medium mb-0.5">Email Us</p>
                     <p className="font-semibold text-text-dark group-hover:text-primary transition-colors text-sm">{contact.email}</p>
+                    <p className="font-semibold text-text-dark group-hover:text-primary transition-colors text-sm">{contact.secondaryEmail}</p>
                     <p className="text-xs text-text-light">Reply within 2 hours</p>
                   </div>
                 </a>

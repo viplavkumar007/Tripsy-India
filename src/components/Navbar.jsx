@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Mail, Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { brand, nav, contact } from '../data/siteContent';
 import { useScrolled } from '../hooks/useScrollSpy';
@@ -73,6 +73,16 @@ export default function Navbar({ activeSection }) {
 
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
+          <a
+            href={`mailto:${contact.secondaryEmail || contact.email}`}
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+              scrolled ? 'bg-primary/10 hover:bg-primary/15' : 'bg-white/60 backdrop-blur-sm hover:bg-white/80'
+            }`}
+            aria-label="Email Tripsy India"
+            title={contact.secondaryEmail || contact.email}
+          >
+            <Mail size={14} className="text-primary" />
+          </a>
           <a
             href={`tel:${contact.phone}`}
             className={`flex items-center gap-2 text-sm font-semibold transition-colors ${

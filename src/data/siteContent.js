@@ -18,6 +18,7 @@ export const contact = {
   phoneDisplay: "+91 97608 67173",
   whatsapp: "919760867173",
   email: "tripsyindia087@gmail.com",
+  secondaryEmail: "info@tripsyindia.com",
   address: "Shop No-46, Kotwali Road, Amroha, Uttar Pradesh",
   mapLink: "https://maps.google.com/?q=Kotwali+Road+Amroha",
   social: {

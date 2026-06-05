@@ -1,23 +1,73 @@
 import { motion } from 'framer-motion';
 import { Clock, MapPin, MessageCircle, Mountain, Snowflake, Trees } from 'lucide-react';
-import { contact, destinations } from '../../data/siteContent';
+import { contact } from '../../data/siteContent';
 import { fadeUp, staggerContainer, viewportOnce } from '../../utils/motionVariants';
 
 const hillPackages = [
-  destinations.find((dest) => dest.name === 'Kashmir'),
-  destinations.find((dest) => dest.name === 'Manali'),
-  destinations.find((dest) => dest.name === 'Himachal Pradesh'),
-  destinations.find((dest) => dest.name === 'Darjeeling'),
   {
-    id: 'other-hill-stations',
-    name: 'Other Hill Stations',
-    tagline: 'Shimla, Mussoorie, Nainital, Uttarakhand',
-    image: '/gallery-02.png',
-    nights: 'Custom Trips',
-    highlights: ['Family tours', 'Honeymoon plans', 'Weekend getaways'],
-    badge: 'Custom',
+    id: 'shimla',
+    name: 'Shimla',
+    tagline: 'Queen of Hills',
+    image: '/himachal-card.png',
+    nights: '3N/4D',
+    highlights: ['Mall Road', 'Kufri snow point', 'Jakhu Temple'],
+    badge: 'Family',
   },
-].filter(Boolean);
+  {
+    id: 'kullu-manali',
+    name: 'Kullu Manali',
+    tagline: 'Adventure in the Himalayas',
+    image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80',
+    nights: '4N/5D',
+    highlights: ['Solang Valley', 'Rohtang Pass', 'Kullu rafting'],
+    badge: 'Popular',
+  },
+  {
+    id: 'kashmir',
+    name: 'Kashmir',
+    tagline: 'Paradise on Earth',
+    image: '/kashmir-card.png',
+    nights: '5N/6D',
+    highlights: ['Dal Lake Shikara', 'Gulmarg Gondola', 'Pahalgam Valley'],
+    badge: 'Bestseller',
+  },
+  {
+    id: 'mussoorie',
+    name: 'Mussoorie',
+    tagline: 'The Garhwal hill escape',
+    image: '/gallery-02.png',
+    nights: '3N/4D',
+    highlights: ['Kempty Falls', 'Mall Road', 'Gun Hill'],
+    badge: 'Scenic',
+  },
+  {
+    id: 'darjeeling',
+    name: 'Darjeeling',
+    tagline: 'Queen of Hills',
+    image: '/darjeeling-card.png',
+    nights: '3N/4D',
+    highlights: ['Tiger Hill sunrise', 'Toy Train Ride', 'Tea Gardens'],
+    badge: 'Trending',
+  },
+  {
+    id: 'nainital',
+    name: 'Nainital',
+    tagline: 'Lakeside mountain holiday',
+    image: '/gallery-04.png',
+    nights: '2N/3D',
+    highlights: ['Naini Lake', 'Snow View Point', 'Mall Road'],
+    badge: 'Weekend',
+  },
+  {
+    id: 'rishikesh',
+    name: 'Rishikesh',
+    tagline: 'Yoga, Ganga and adventure',
+    image: '/gallery-02.png',
+    nights: '2N/3D',
+    highlights: ['River rafting', 'Ganga Aarti', 'Laxman Jhula'],
+    badge: 'Adventure',
+  },
+];
 
 const iconMap = [Snowflake, Mountain, Trees];
 
@@ -42,7 +92,7 @@ export default function HomeHillPackages() {
               Hill Station Packages
             </motion.span>
             <motion.h2 variants={fadeUp} className="section-title">
-              Kashmir, Manali & <span className="text-gradient">More Mountain Trips</span>
+              Shimla, Kullu Manali & <span className="text-gradient">More Mountain Trips</span>
             </motion.h2>
           </div>
           <motion.p variants={fadeUp} className="text-text-light text-sm md:max-w-md">
@@ -55,7 +105,7 @@ export default function HomeHillPackages() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7"
         >
           {hillPackages.map((dest, index) => {
             const Icon = iconMap[index % iconMap.length];

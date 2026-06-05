@@ -98,6 +98,7 @@ export default function Footer() {
                 <div>
                   <p className="text-white/40 text-xs mb-0.5">Email</p>
                   <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors break-all">{contact.email}</p>
+                  <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors break-all">{contact.secondaryEmail}</p>
                 </div>
               </a>
               <div className="flex items-start gap-3">

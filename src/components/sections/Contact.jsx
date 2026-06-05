@@ -4,6 +4,25 @@ import { contact } from '../../data/siteContent';
 import EnquiryForm from '../EnquiryForm';
 import { fadeUp, slideLeft, slideRight, staggerContainer, viewportOnce } from '../../utils/motionVariants';
 
+const emailLinks = [
+  {
+    email: contact.email,
+    label: 'Tour enquiry lead',
+    subject: 'Tour Enquiry Lead - Tripsy India',
+    body: 'Hello Tripsy India,\n\nI want details about your tour packages.\n\nDestination:\nTravel Date:\nNo. of Travelers:\nPhone:\n\nPlease contact me with package details.',
+  },
+  {
+    email: contact.secondaryEmail,
+    label: 'Business enquiry lead',
+    subject: 'Business Enquiry Lead - Tripsy India',
+    body: 'Hello Tripsy India,\n\nI want to connect regarding a business enquiry.\n\nName:\nPhone:\nRequirement:\n\nPlease get back to me.',
+  },
+];
+
+function getMailto({ email, subject, body }) {
+  return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export default function Contact() {
   return (
     <section id="enquiry" className="py-20 md:py-28 bg-white">
@@ -47,17 +66,25 @@ export default function Contact() {
                     <p className="text-xs text-text-light">Mon-Sun, 9am-9pm</p>
                   </div>
                 </a>
-                <a href={`mailto:${contact.email}`} className="flex items-start gap-4 group">
+                <div className="flex items-start gap-4">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg,#FF2E93,#ff6b35)' }}>
                     <Mail size={18} className="text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-text-light font-medium mb-0.5">Email Us</p>
-                    <p className="font-semibold text-text-dark group-hover:text-primary transition-colors text-sm">{contact.email}</p>
-                    <p className="font-semibold text-text-dark group-hover:text-primary transition-colors text-sm">{contact.secondaryEmail}</p>
+                    {emailLinks.map((link) => (
+                      <a
+                        key={link.email}
+                        href={getMailto(link)}
+                        className="block font-semibold text-text-dark hover:text-primary transition-colors text-sm"
+                        aria-label={`${link.label}: ${link.email}`}
+                      >
+                        {link.email}
+                      </a>
+                    ))}
                     <p className="text-xs text-text-light">Reply within 2 hours</p>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
 

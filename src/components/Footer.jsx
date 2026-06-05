@@ -3,6 +3,25 @@ import { Phone, Mail, Facebook, Instagram, Youtube, Twitter, Heart } from 'lucid
 import { brand, contact, quickLinks, popularDestinations } from '../data/siteContent';
 import { fadeUp, staggerContainer, viewportOnce } from '../utils/motionVariants';
 
+const emailLinks = [
+  {
+    email: contact.email,
+    label: 'Tour enquiry lead',
+    subject: 'Tour Enquiry Lead - Tripsy India',
+    body: 'Hello Tripsy India,\n\nI want details about your tour packages.\n\nDestination:\nTravel Date:\nNo. of Travelers:\nPhone:\n\nPlease contact me with package details.',
+  },
+  {
+    email: contact.secondaryEmail,
+    label: 'Business enquiry lead',
+    subject: 'Business Enquiry Lead - Tripsy India',
+    body: 'Hello Tripsy India,\n\nI want to connect regarding a business enquiry.\n\nName:\nPhone:\nRequirement:\n\nPlease get back to me.',
+  },
+];
+
+function getMailto({ email, subject, body }) {
+  return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export default function Footer() {
   const scrollTo = (id) => {
     document.getElementById(id.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
@@ -91,16 +110,24 @@ export default function Footer() {
                   <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors">{contact.phoneDisplay}</p>
                 </div>
               </a>
-              <a href={`mailto:${contact.email}`} className="flex items-start gap-3 group">
+              <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors mt-0.5">
                   <Mail size={14} />
                 </div>
                 <div>
                   <p className="text-white/40 text-xs mb-0.5">Email</p>
-                  <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors break-all">{contact.email}</p>
-                  <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors break-all">{contact.secondaryEmail}</p>
+                  {emailLinks.map((link) => (
+                    <a
+                      key={link.email}
+                      href={getMailto(link)}
+                      className="block text-white/80 text-sm font-medium hover:text-primary transition-colors break-all"
+                      aria-label={`${link.label}: ${link.email}`}
+                    >
+                      {link.email}
+                    </a>
+                  ))}
                 </div>
-              </a>
+              </div>
             </div>
           </motion.div>
         </motion.div>

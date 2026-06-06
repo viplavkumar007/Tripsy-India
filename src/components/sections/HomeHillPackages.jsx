@@ -10,6 +10,7 @@ const hillPackages = [
     tagline: 'Queen of Hills',
     image: '/himachal-card.png',
     nights: '3N/4D',
+    price: '₹5,999/- onward',
     highlights: ['Mall Road', 'Kufri snow point', 'Jakhu Temple'],
     badge: 'Family',
   },
@@ -19,6 +20,7 @@ const hillPackages = [
     tagline: 'Adventure in the Himalayas',
     image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80',
     nights: '4N/5D',
+    price: '₹7,999/- onward',
     highlights: ['Solang Valley', 'Rohtang Pass', 'Kullu rafting'],
     badge: 'Popular',
   },
@@ -28,6 +30,7 @@ const hillPackages = [
     tagline: 'Paradise on Earth',
     image: '/kashmir-card.png',
     nights: '5N/6D',
+    price: '₹13,999/- onward',
     highlights: ['Dal Lake Shikara', 'Gulmarg Gondola', 'Pahalgam Valley'],
     badge: 'Bestseller',
   },
@@ -37,6 +40,7 @@ const hillPackages = [
     tagline: 'The Garhwal hill escape',
     image: '/gallery-02.png',
     nights: '3N/4D',
+    price: '₹6,999/- onward',
     highlights: ['Kempty Falls', 'Mall Road', 'Gun Hill'],
     badge: 'Scenic',
   },
@@ -46,6 +50,7 @@ const hillPackages = [
     tagline: 'Queen of Hills',
     image: '/darjeeling-card.png',
     nights: '3N/4D',
+    price: '₹16,999/- onward',
     highlights: ['Tiger Hill sunrise', 'Toy Train Ride', 'Tea Gardens'],
     badge: 'Trending',
   },
@@ -55,6 +60,7 @@ const hillPackages = [
     tagline: 'Lakeside mountain holiday',
     image: '/gallery-04.png',
     nights: '2N/3D',
+    price: '₹9,999/- onward',
     highlights: ['Naini Lake', 'Snow View Point', 'Mall Road'],
     badge: 'Weekend',
   },
@@ -64,6 +70,7 @@ const hillPackages = [
     tagline: 'Yoga, Ganga and adventure',
     image: '/gallery-02.png',
     nights: '2N/3D',
+    price: '₹3,900/- onward',
     highlights: ['River rafting', 'Ganga Aarti', 'Laxman Jhula'],
     badge: 'Adventure',
   },
@@ -139,7 +146,10 @@ export default function HomeHillPackages() {
                     <span className="inline-flex items-center gap-1 font-semibold text-text-dark">
                       <Clock size={13} className="text-primary" /> {dest.nights}
                     </span>
-                    <Icon size={16} className="text-primary" />
+                    <span className="inline-flex items-center gap-1 font-bold text-primary">
+                      {dest.price}
+                      <Icon size={16} />
+                    </span>
                   </div>
 
                   <ul className="mb-4 space-y-2">

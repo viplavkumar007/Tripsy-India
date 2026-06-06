@@ -14,6 +14,13 @@ export default function TopBar() {
             <span>{contact.phoneDisplay}</span>
           </a>
           <a
+            href={`tel:${contact.secondaryPhone}`}
+            className="flex items-center gap-1.5 hover:text-primary transition-colors"
+          >
+            <Phone size={13} />
+            <span>{contact.secondaryPhoneDisplay}</span>
+          </a>
+          <a
             href={`mailto:${contact.email}`}
             className="flex items-center gap-1.5 hover:text-primary transition-colors"
           >

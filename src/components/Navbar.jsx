@@ -74,30 +74,36 @@ export default function Navbar({ activeSection }) {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <a
-            href={`mailto:${contact.secondaryEmail || contact.email}`}
+            href={`mailto:${contact.email}`}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
               scrolled ? 'bg-primary/10 hover:bg-primary/15' : 'bg-white/60 backdrop-blur-sm hover:bg-white/80'
             }`}
             aria-label="Email Tripsy India"
-            title={contact.secondaryEmail || contact.email}
+            title={contact.email}
           >
             <Mail size={14} className="text-primary" />
           </a>
-          <a
-            href={`tel:${contact.phone}`}
-            className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
-              scrolled ? 'text-text-dark hover:text-primary' : 'text-text-dark hover:text-primary drop-shadow-sm'
-            }`}
-          >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                scrolled ? 'bg-primary/10' : 'bg-white/60 backdrop-blur-sm'
+          {[
+            { number: contact.phone, display: contact.phoneDisplay },
+            { number: contact.secondaryPhone, display: contact.secondaryPhoneDisplay },
+          ].map((item) => (
+            <a
+              key={item.number}
+              href={`tel:${item.number}`}
+              className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
+                scrolled ? 'text-text-dark hover:text-primary' : 'text-text-dark hover:text-primary drop-shadow-sm'
               }`}
             >
-              <Phone size={14} className="text-primary" />
-            </div>
-            <span>{contact.phoneDisplay}</span>
-          </a>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  scrolled ? 'bg-primary/10' : 'bg-white/60 backdrop-blur-sm'
+                }`}
+              >
+                <Phone size={14} className="text-primary" />
+              </div>
+              <span>{item.display}</span>
+            </a>
+          ))}
           <button
             onClick={() => handleNavClick('#enquiry')}
             className="btn-primary text-sm px-5 py-2.5"
@@ -167,7 +173,11 @@ export default function Navbar({ activeSection }) {
               <div className="p-4 border-t border-border space-y-3">
                 <a href={`tel:${contact.phone}`} className="btn-outline w-full justify-center">
                   <Phone size={16} />
-                  Call Us Now
+                  {contact.phoneDisplay}
+                </a>
+                <a href={`tel:${contact.secondaryPhone}`} className="btn-outline w-full justify-center">
+                  <Phone size={16} />
+                  {contact.secondaryPhoneDisplay}
                 </a>
                 <button onClick={() => handleNavClick('#enquiry')} className="btn-primary w-full justify-center">
                   Book Now

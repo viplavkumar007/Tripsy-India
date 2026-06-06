@@ -10,12 +10,6 @@ const emailLinks = [
     subject: 'Tour Enquiry Lead - Tripsy India',
     body: 'Hello Tripsy India,\n\nI want details about your tour packages.\n\nDestination:\nTravel Date:\nNo. of Travelers:\nPhone:\n\nPlease contact me with package details.',
   },
-  {
-    email: contact.secondaryEmail,
-    label: 'Business enquiry lead',
-    subject: 'Business Enquiry Lead - Tripsy India',
-    body: 'Hello Tripsy India,\n\nI want to connect regarding a business enquiry.\n\nName:\nPhone:\nRequirement:\n\nPlease get back to me.',
-  },
 ];
 
 function getMailto({ email, subject, body }) {
@@ -101,15 +95,20 @@ export default function Footer() {
           <motion.div variants={fadeUp}>
             <h4 className="font-bold text-white mb-5 text-base">Contact Details</h4>
             <div className="space-y-4">
-              <a href={`tel:${contact.phone}`} className="flex items-start gap-3 group">
+              <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors mt-0.5">
                   <Phone size={14} />
                 </div>
                 <div>
                   <p className="text-white/40 text-xs mb-0.5">Phone</p>
-                  <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors">{contact.phoneDisplay}</p>
+                  <a href={`tel:${contact.phone}`} className="block text-white/80 text-sm font-medium hover:text-primary transition-colors">
+                    {contact.phoneDisplay}
+                  </a>
+                  <a href={`tel:${contact.secondaryPhone}`} className="block text-white/80 text-sm font-medium hover:text-primary transition-colors">
+                    {contact.secondaryPhoneDisplay}
+                  </a>
                 </div>
-              </a>
+              </div>
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors mt-0.5">
                   <Mail size={14} />

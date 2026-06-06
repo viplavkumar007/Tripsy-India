@@ -42,9 +42,12 @@ function DestinationCard({ dest, index }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 text-xs text-text-light mb-4">
-          <Clock size={13} className="text-primary" />
-          <span>{dest.nights}</span>
+        <div className="flex items-center justify-between gap-3 text-xs mb-4">
+          <span className="flex items-center gap-1.5 text-text-light">
+            <Clock size={13} className="text-primary" />
+            {dest.nights}
+          </span>
+          <span className="font-bold text-primary text-right">{dest.price}</span>
         </div>
 
         {/* Highlights */}

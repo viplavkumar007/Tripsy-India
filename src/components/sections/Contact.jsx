@@ -11,12 +11,6 @@ const emailLinks = [
     subject: 'Tour Enquiry Lead - Tripsy India',
     body: 'Hello Tripsy India,\n\nI want details about your tour packages.\n\nDestination:\nTravel Date:\nNo. of Travelers:\nPhone:\n\nPlease contact me with package details.',
   },
-  {
-    email: contact.secondaryEmail,
-    label: 'Business enquiry lead',
-    subject: 'Business Enquiry Lead - Tripsy India',
-    body: 'Hello Tripsy India,\n\nI want to connect regarding a business enquiry.\n\nName:\nPhone:\nRequirement:\n\nPlease get back to me.',
-  },
 ];
 
 function getMailto({ email, subject, body }) {
@@ -56,16 +50,21 @@ export default function Contact() {
             <div className="bg-section-alt rounded-2xl p-6 border border-border">
               <h3 className="font-bold text-text-dark text-lg mb-5">Contact Information</h3>
               <div className="space-y-5">
-                <a href={`tel:${contact.phone}`} className="flex items-start gap-4 group">
+                <div className="flex items-start gap-4">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg,#00B8C4,#0EA5E9)' }}>
                     <Phone size={18} className="text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-text-light font-medium mb-0.5">Call Us</p>
-                    <p className="font-semibold text-text-dark group-hover:text-primary transition-colors">{contact.phoneDisplay}</p>
+                    <a href={`tel:${contact.phone}`} className="block font-semibold text-text-dark hover:text-primary transition-colors">
+                      {contact.phoneDisplay}
+                    </a>
+                    <a href={`tel:${contact.secondaryPhone}`} className="block font-semibold text-text-dark hover:text-primary transition-colors">
+                      {contact.secondaryPhoneDisplay}
+                    </a>
                     <p className="text-xs text-text-light">Mon-Sun, 9am-9pm</p>
                   </div>
-                </a>
+                </div>
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg,#FF2E93,#ff6b35)' }}>
                     <Mail size={18} className="text-white" />

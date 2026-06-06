@@ -54,7 +54,10 @@ export default function CTABanner() {
             </a>
             <a href={`tel:${contact.phone}`} className="inline-flex items-center gap-2 bg-white text-primary font-bold px-9 py-4 rounded-full hover:-translate-y-1 transition-transform duration-300 shadow-lg text-base">
               <Phone size={20} />
-              {contact.phoneDisplay}
+              <span className="flex flex-col leading-tight text-left">
+                <span>{contact.phoneDisplay}</span>
+                <span>{contact.secondaryPhoneDisplay}</span>
+              </span>
             </a>
           </motion.div>
         </motion.div>
